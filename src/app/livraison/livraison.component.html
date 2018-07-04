@@ -1,1 +1,6 @@
 <h3>Hello from livraison</h3>
+<ul>
+<li *ngFor="let livraison of livraisons">
+  Reference : {{livraison.ref}}, Nom Expéditeur : {{livraison.expediteur_nom}} , Prénom Expéditeur : {{livraison.expediteur_prenom}}, Nom Destinataire : {{livraison.destinataire_nom}}, Prénom Destinataire : {{livraison.destinataire_prenom}}
+</li>
+</ul>
