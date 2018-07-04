@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Livraison} from '../shared/livraison';
 
-@Injectable
+@Injectable()
 export class LivraisonMockService {
 
   private LIVRAISONS : Livraison[] = [];

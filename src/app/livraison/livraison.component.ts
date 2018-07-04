@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LivraisonMockService} from './livraison.mock.service';
+import {Livraison} from '../shared/livraison';
 
 @Component({
   selector : 'app-livraison',
