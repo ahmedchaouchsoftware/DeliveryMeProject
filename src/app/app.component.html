@@ -1,2 +1,12 @@
-<h2>Delivery Me</h2>
-<app-livraison></app-livraison>
+<div class="row body">
+  <div class="col-lg-2" *ngIf="showHideSideBar">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col-lg-10">
+   <app-navbar
+    [showSideBar] = "showHideSideBar"
+    (showSideBarChange) = "onShowSideBarChange($event)"
+   ></app-navbar>
+  <app-content></app-content>
+  </div>
+</div>
