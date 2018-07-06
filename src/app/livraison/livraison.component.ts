@@ -1,6 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {LivraisonMockService} from './livraison.mock.service';
-import {Livraison} from '../shared/livraison';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+import { LivraisonMockService } from './livraison.mock.service';
+import { Livraison } from '../shared/livraison';
 
 @Component({
   selector : 'app-livraison',
@@ -10,8 +12,17 @@ import {Livraison} from '../shared/livraison';
 export class LivraisonComponent implements OnInit{
 
   livraisons: Livraison[];
-  constructor(private livraisonService: LivraisonMockService){
 
+  livraisonForm : FormGroup;
+  constructor(private livraisonService: LivraisonMockService, private fb : FormBuilder){
+    this.livraisonForm = this.fb.group({
+      ref: ['',Validators.required],
+      expediteur_nom: '',
+      expediteur_prenom: '',
+      expediteur_adresse: '',
+      destinataire_nom: '',
+      destinataire_adresse: ''
+    });
   }
 
   ngOnInit(){

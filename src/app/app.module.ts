@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { LivraisonComponent } from './livraison/livraison.component';
@@ -20,7 +21,7 @@ import { AppRoutingModule } from './app.routing.module';
     DashboardComponent
   ],
   imports: [
-    BrowserModule, AppRoutingModule
+    BrowserModule, AppRoutingModule, ReactiveFormsModule
   ],
   providers: [LivraisonMockService],
   bootstrap: [AppComponent]

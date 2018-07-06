@@ -1,6 +1,60 @@
-<h3>Hello from livraison</h3>
-<ul>
-<li *ngFor="let livraison of livraisons">
-  Reference : {{livraison.ref}}, Nom Expéditeur : {{livraison.expediteur_nom}} , Prénom Expéditeur : {{livraison.expediteur_prenom}}, Adresse Expéditeur : {{livraison.expediteur_adresse}}, Nom Destinataire : {{livraison.destinataire_nom}}, Prénom Destinataire : {{livraison.destinataire_prenom}}, Adresse Destinataire : {{livraison.destinataire_adresse}}
-</li>
-</ul>
+<h3>Livraisons</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-7">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Reference</th><th>Nom Expéditeur</th><th>Prénom Expéditeur</th><th>Adresse Expéditeur</th><th>Nom Destinataire</th><th>Adresse Destinataire</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let livraison of livraisons">
+            <td>{{livraison.ref}}</td><td>{{livraison.expediteur_nom}}</td><td>{{livraison.expediteur_prenom}}</td><td>{{livraison.expediteur_adresse}}</td><td>{{livraison.destinataire_nom}}</td><td>{{livraison.destinataire_adresse}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-lg-5">
+      <div class="card">
+        <div class="card-header bg-info text-white">
+          Ajouter Livraison
+        </div>
+        <div class="card-body">
+          <form [formGroup]="livraisonForm">
+            <div class="form-group">
+              <label>Réference :</label>
+              <input type="text" class="form-control" formControlName="ref"/>
+            </div>
+            <div class="alert alert-danger" *ngIf="livraisonForm.controls['ref'].invalid && (livraisonForm.controls['ref'].touched || livraisonForm.controls['ref'].dirty)">
+              Référence est Obligatoire!
+            </div>
+            <div class="form-group">
+              <label>Nom Expéditeur :</label>
+              <input type="text" class="form-control" formControlName="expediteur_nom"/>
+            </div>
+            <div class="form-group">
+              <label>Prénom Expéditeur :</label>
+              <input type="text" class="form-control" formControlName="expediteur_prenom"/>
+            </div>
+            <div class="form-group">
+              <label>Adresse Expéditeur :</label>
+              <input type="text" class="form-control" formControlName="expediteur_adresse"/>
+            </div>
+            <div class="form-group">
+              <label>Nom Destinataire :</label>
+              <input type="text" class="form-control" formControlName="destinataire_nom"/>
+            </div>
+            <div class="form-group">
+              <label>Adresse Destinataire :</label>
+              <input type="text" class="form-control" formControlName="destinataire_adresse"/>
+            </div>
+            <button class="btn btn-success" [disabled]="livraisonForm.prestine || livraisonForm.invalid">Ajouter</button>
+          </form>
+        </div>
+        <div class="card-footer">
+
+        </div>
+      </div>
+    </div>
+</div>
