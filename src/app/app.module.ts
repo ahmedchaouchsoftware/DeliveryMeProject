@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LivraisonComponent } from './livraison/livraison.component';
@@ -10,6 +11,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { ContentComponent } from './content/content.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './app.routing.module';
+import { LivraisonService } from './livraison/livraison.service'
 
 @NgModule({
   declarations: [
@@ -21,9 +23,9 @@ import { AppRoutingModule } from './app.routing.module';
     DashboardComponent
   ],
   imports: [
-    BrowserModule, AppRoutingModule, ReactiveFormsModule
+    BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule
   ],
-  providers: [LivraisonMockService],
+  providers: [LivraisonMockService, LivraisonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
