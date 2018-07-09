@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { LivraisonMockService } from './livraison.mock.service';
+import { LivraisonService } from './livraison.service';
 import { Livraison } from '../shared/livraison';
 
 @Component({
@@ -14,7 +14,7 @@ export class LivraisonComponent implements OnInit{
   livraisons: Livraison[];
 
   livraisonForm : FormGroup;
-  constructor(private livraisonService: LivraisonMockService, private fb : FormBuilder){
+  constructor(private livraisonService: LivraisonService, private fb : FormBuilder){
     this.livraisonForm = this.fb.group({
       ref: ['',Validators.required],
       expediteur_nom: '',
@@ -26,6 +26,14 @@ export class LivraisonComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.livraisons = this.livraisonService.getLivraisons();
+    this.loadLivraisons();
+  }
+
+  loadLivraisons(){
+    this.livraisonService.getLivraisons().subscribe(
+      data => { this.livraisons = data },
+      error => { console.log('An error was occured.')},
+      () => { console.log('loading livraisons was done.')}
+    );
   }
 }
