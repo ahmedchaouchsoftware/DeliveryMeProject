@@ -1,21 +1,28 @@
 <h3>Livraisons</h3>
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-lg-7">
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>Reference</th><th>Nom Expéditeur</th><th>Prénom Expéditeur</th><th>Adresse Expéditeur</th><th>Nom Destinataire</th><th>Adresse Destinataire</th>
+            <th>Réference</th><th>Nom Expéditeur</th><th>Prénom Expéditeur</th><th>Adresse Expéditeur</th><th>Nom Destinataire</th><th>Adresse Destinataire</th>
+            <th>
+              <button class="btn btn-outline-primary">Ajouter</button>
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let livraison of livraisons">
             <td>{{livraison.ref}}</td><td>{{livraison.expediteur_nom}}</td><td>{{livraison.expediteur_prenom}}</td><td>{{livraison.expediteur_adresse}}</td><td>{{livraison.destinataire_nom}}</td><td>{{livraison.destinataire_adresse}}</td>
+            <td>
+              <button class="btn btn-outline-primary">Modifier</button>
+              <button class="btn btn-outline-danger">Supprimer</button>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-4">
       <div class="card">
         <div class="card-header bg-info text-white">
           Ajouter Livraison
@@ -49,12 +56,13 @@
               <label>Adresse Destinataire :</label>
               <input type="text" class="form-control" formControlName="destinataire_adresse"/>
             </div>
-            <button class="btn btn-success" [disabled]="livraisonForm.prestine || livraisonForm.invalid">Ajouter</button>
+            <button class="btn btn-success" [disabled]="livraisonForm.prestine || livraisonForm.invalid"
+            (click)="addLivraison()">Ajouter</button>
           </form>
         </div>
         <div class="card-footer">
-
         </div>
       </div>
     </div>
+</div>
 </div>

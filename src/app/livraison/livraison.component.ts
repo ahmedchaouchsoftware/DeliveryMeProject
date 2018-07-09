@@ -36,4 +36,13 @@ export class LivraisonComponent implements OnInit{
       () => { console.log('loading livraisons was done.')}
     );
   }
+
+  addLivraison(){
+    const l = this.livraisonForm.value;
+    this.livraisonService.addLivraison(l).subscribe(
+      res => {
+        this.loadLivraisons();
+      }
+    );
+  }
 }
