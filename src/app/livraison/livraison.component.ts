@@ -70,7 +70,7 @@ export class LivraisonComponent implements OnInit{
   }
 
   deleteLivraison(){
-    this.livraisonService.deleteLivraison(this.selectedLivraison.ref).
+    this.livraisonService.deleteLivraison(this.selectedLivraison.idLivraison).
     subscribe(
       res => {
         this.selectedLivraison = new Livraison();

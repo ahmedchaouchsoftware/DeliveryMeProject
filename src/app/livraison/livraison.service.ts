@@ -25,7 +25,7 @@ export class LivraisonService {
     return this.http.put(API_URLS.LIVRAISONS_URL, livraison);
   }
 
-  deleteLivraison(refLivraison: string):Observable<any>{
-    return this.http.delete(API_URLS.LIVRAISONS_URL + `/${refLivraison}`);
+  deleteLivraison(idLivraison: number):Observable<any>{
+    return this.http.delete(API_URLS.LIVRAISONS_URL + `/${idLivraison}`);
   }
 }

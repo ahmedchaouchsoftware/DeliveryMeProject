@@ -1,6 +1,7 @@
 
 export class Livraison{
-  constructor(public ref?: string,
+  constructor(public idLivraison?: number,
+              public ref?: string,
               public expediteur_nom?: string,
               public expediteur_prenom?: string,
               public expediteur_adresse?: string,
