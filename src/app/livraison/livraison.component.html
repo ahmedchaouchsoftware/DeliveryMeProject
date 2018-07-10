@@ -7,16 +7,17 @@
           <tr>
             <th>Réference</th><th>Nom Expéditeur</th><th>Prénom Expéditeur</th><th>Adresse Expéditeur</th><th>Nom Destinataire</th><th>Adresse Destinataire</th>
             <th>
-              <button class="btn btn-outline-primary">Ajouter</button>
+              <button class="btn btn-outline-primary" (click)="operation = 'ajouter'; initLivraison();">Ajouter</button>
             </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let livraison of livraisons">
             <td>{{livraison.ref}}</td><td>{{livraison.expediteur_nom}}</td><td>{{livraison.expediteur_prenom}}</td><td>{{livraison.expediteur_adresse}}</td><td>{{livraison.destinataire_nom}}</td><td>{{livraison.destinataire_adresse}}</td>
-            <td>
-              <button class="btn btn-outline-primary">Modifier</button>
-              <button class="btn btn-outline-danger">Supprimer</button>
+            <td class="container-fluid">
+              <button class="btn btn-outline-primary" (click)="operation = 'modifier'; selectedLivraison = livraison;">Modifier</button>
+              &nbsp;
+              <button class="btn btn-outline-danger" (click)="operation = 'supprimer';">Supprimer</button>
             </td>
           </tr>
         </tbody>
@@ -25,40 +26,56 @@
     <div class="col-lg-4">
       <div class="card">
         <div class="card-header bg-info text-white">
-          Ajouter Livraison
+          {{operation == 'ajouter' ? 'Ajouter Livraison' :
+            operation == 'modifier' ? 'Modifier Livraison' :
+            operation == 'supprimer' ? 'Supprimer Livraison' : ''}}
         </div>
         <div class="card-body">
-          <form [formGroup]="livraisonForm">
-            <div class="form-group">
-              <label>Réference :</label>
-              <input type="text" class="form-control" formControlName="ref"/>
-            </div>
-            <div class="alert alert-danger" *ngIf="livraisonForm.controls['ref'].invalid && (livraisonForm.controls['ref'].touched || livraisonForm.controls['ref'].dirty)">
-              Référence est Obligatoire!
-            </div>
-            <div class="form-group">
-              <label>Nom Expéditeur :</label>
-              <input type="text" class="form-control" formControlName="expediteur_nom"/>
-            </div>
-            <div class="form-group">
-              <label>Prénom Expéditeur :</label>
-              <input type="text" class="form-control" formControlName="expediteur_prenom"/>
-            </div>
-            <div class="form-group">
-              <label>Adresse Expéditeur :</label>
-              <input type="text" class="form-control" formControlName="expediteur_adresse"/>
-            </div>
-            <div class="form-group">
-              <label>Nom Destinataire :</label>
-              <input type="text" class="form-control" formControlName="destinataire_nom"/>
-            </div>
-            <div class="form-group">
-              <label>Adresse Destinataire :</label>
-              <input type="text" class="form-control" formControlName="destinataire_adresse"/>
-            </div>
-            <button class="btn btn-success" [disabled]="livraisonForm.prestine || livraisonForm.invalid"
-            (click)="addLivraison()">Ajouter</button>
-          </form>
+          <div *ngIf="operation == 'ajouter' || operation == 'modifier'">
+            <form [formGroup]="livraisonForm">
+              <div class="form-group">
+                <label>Réference :</label>
+                <input type="text" class="form-control" formControlName="ref" [(ngModel)]="selectedLivraison.ref"/>
+              </div>
+              <div class="alert alert-danger" *ngIf="livraisonForm.controls['ref'].invalid && (livraisonForm.controls['ref'].touched || livraisonForm.controls['ref'].dirty)">
+                Référence est Obligatoire!
+              </div>
+              <div class="form-group">
+                <label>Nom Expéditeur :</label>
+                <input type="text" class="form-control" formControlName="expediteur_nom" [(ngModel)]="selectedLivraison.expediteur_nom"/>
+              </div>
+              <div class="form-group">
+                <label>Prénom Expéditeur :</label>
+                <input type="text" class="form-control" formControlName="expediteur_prenom" [(ngModel)]="selectedLivraison.expediteur_prenom"/>
+              </div>
+              <div class="form-group">
+                <label>Adresse Expéditeur :</label>
+                <input type="text" class="form-control" formControlName="expediteur_adresse" [(ngModel)]="selectedLivraison.expediteur_adresse"/>
+              </div>
+              <div class="form-group">
+                <label>Nom Destinataire :</label>
+                <input type="text" class="form-control" formControlName="destinataire_nom" [(ngModel)]="selectedLivraison.destinataire_nom"/>
+              </div>
+              <div class="form-group">
+                <label>Adresse Destinataire :</label>
+                <input type="text" class="form-control" formControlName="destinataire_adresse" [(ngModel)]="selectedLivraison.destinataire_adresse"/>
+              </div>
+              <button class="btn btn-success" [disabled]="livraisonForm.prestine || livraisonForm.invalid"
+              (click)="operation == 'ajouter' ? addLivraison() : updateLivraison()">
+                    {{ operation == 'ajouter' ? 'Ajouter' :
+                       operation == 'modifier' ? 'Modifier' : ''}}
+              </button>
+            </form>
+          </div>
+          <div *ngIf="operation == 'supprimer'">
+            <p class="card-title">
+              Référence: {{selectedLivraison.ref}}
+            </p>
+            <p>
+              Voulez-vous supprimer cette livraison ?
+            </p>
+            <button class="btn btn-success" [disabled]="!selectedLivraison.ref" (click)="deleteLivraison()">Confirmer</button>
+          </div>
         </div>
         <div class="card-footer">
         </div>

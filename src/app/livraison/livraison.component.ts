@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { LivraisonService } from './livraison.service';
 import { Livraison } from '../shared/livraison';
@@ -14,7 +15,22 @@ export class LivraisonComponent implements OnInit{
   livraisons: Livraison[];
 
   livraisonForm : FormGroup;
-  constructor(private livraisonService: LivraisonService, private fb : FormBuilder){
+
+  operation: string = "ajouter";
+
+  selectedLivraison : Livraison;
+
+
+  constructor(private livraisonService: LivraisonService, private fb : FormBuilder, private route: ActivatedRoute){
+    this.createForm();
+  }
+
+  ngOnInit(){
+    this.initLivraison();
+    this.livraisons = this.route.snapshot.data.livraisons;
+  }
+
+  createForm(){
     this.livraisonForm = this.fb.group({
       ref: ['',Validators.required],
       expediteur_nom: '',
@@ -23,10 +39,6 @@ export class LivraisonComponent implements OnInit{
       destinataire_nom: '',
       destinataire_adresse: ''
     });
-  }
-
-  ngOnInit(){
-    this.loadLivraisons();
   }
 
   loadLivraisons(){
@@ -41,8 +53,37 @@ export class LivraisonComponent implements OnInit{
     const l = this.livraisonForm.value;
     this.livraisonService.addLivraison(l).subscribe(
       res => {
+        this.initLivraison();
         this.loadLivraisons();
       }
     );
   }
+
+  updateLivraison(){
+    this.livraisonService.updateLivraison(this.selectedLivraison)
+    .subscribe(
+      res => {
+        this.initLivraison();
+        this.loadLivraisons();
+      }
+    );
+  }
+
+  deleteLivraison(){
+    this.livraisonService.deleteLivraison(this.selectedLivraison.ref).
+    subscribe(
+      res => {
+        this.selectedLivraison = new Livraison();
+        this.loadLivraisons();
+      }
+    );
+  }
+
+
+  initLivraison(){
+    this.selectedLivraison = new Livraison();
+    this.createForm();
+  }
+
+
 }
