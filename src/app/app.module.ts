@@ -11,7 +11,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { ContentComponent } from './content/content.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './app.routing.module';
-import { LivraisonService } from './livraison/livraison.service'
+import { LivraisonService } from './livraison/livraison.service';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component'
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { LivraisonService } from './livraison/livraison.service'
     NavbarComponent,
     SidebarComponent,
     ContentComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule

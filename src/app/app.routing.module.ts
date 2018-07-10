@@ -4,10 +4,19 @@ import { RouterModule, Routes} from '@angular/router';
 import { LivraisonComponent } from './livraison/livraison.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LivraisonResolver } from './livraison/livraison.resolver';
-
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 
 
 export const appRoutes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'home',
+    component: HomeComponent
+  },
   {
     path: 'livraison',
     component: LivraisonComponent,
@@ -15,8 +24,15 @@ export const appRoutes: Routes = [
       livraisons: LivraisonResolver
     }
   },
-  {path: 'dashboard', component: DashboardComponent},
-  {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
+  {
+    path: 'dashboard',
+    component: DashboardComponen
+  },
+  {
+    path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
