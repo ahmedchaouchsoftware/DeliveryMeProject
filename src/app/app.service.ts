@@ -16,6 +16,7 @@ export class AppService {
     } else {
       this.authenticated = false;
     }
-    return callback && callback();
+      return callback && callback();
   }
+
 }

@@ -26,11 +26,11 @@ export const appRoutes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponen
+    component: DashboardComponent
   },
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: '/home',
     pathMatch: 'full'
   }
 ];
