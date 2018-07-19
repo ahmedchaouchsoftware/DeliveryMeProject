@@ -10,15 +10,9 @@ import { AppService } from '../app/app.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'app';
-  showHideSideBar : boolean = false;
 
   constructor(private appservice: AppService,
               private router: Router){}
-
-  onShowSideBarChange(showHideSideBar){
-    this.showHideSideBar = showHideSideBar;
-  }
 
   ngOnInit(){
     if(!this.appservice.authenticated){

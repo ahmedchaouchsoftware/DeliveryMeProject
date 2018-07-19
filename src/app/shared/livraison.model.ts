@@ -1,4 +1,3 @@
-
 export class Livraison{
   constructor(public idLivraison?: number,
               public ref?: string,

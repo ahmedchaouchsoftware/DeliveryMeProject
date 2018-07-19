@@ -3,7 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { LivraisonService } from './livraison.service';
-import { Livraison } from '../shared/livraison';
+import { Livraison } from '../shared/livraison.model';
+
 
 @Component({
   selector : 'app-livraison',
@@ -12,7 +13,7 @@ import { Livraison } from '../shared/livraison';
 })
 export class LivraisonComponent implements OnInit{
 
-  livraisons: Livraison[];
+  public livraisons: Livraison[];
 
   livraisonForm : FormGroup;
 
@@ -60,8 +61,7 @@ export class LivraisonComponent implements OnInit{
   }
 
   updateLivraison(){
-    this.livraisonService.updateLivraison(this.selectedLivraison)
-    .subscribe(
+    this.livraisonService.updateLivraison(this.selectedLivraison).subscribe(
       res => {
         this.initLivraison();
         this.loadLivraisons();
@@ -70,15 +70,13 @@ export class LivraisonComponent implements OnInit{
   }
 
   deleteLivraison(){
-    this.livraisonService.deleteLivraison(this.selectedLivraison.idLivraison).
-    subscribe(
+    this.livraisonService.deleteLivraison(this.selectedLivraison.idLivraison).subscribe(
       res => {
         this.selectedLivraison = new Livraison();
         this.loadLivraisons();
       }
     );
   }
-
 
   initLivraison(){
     this.selectedLivraison = new Livraison();

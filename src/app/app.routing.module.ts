@@ -4,9 +4,10 @@ import { RouterModule, Routes} from '@angular/router';
 import { LivraisonComponent } from './livraison/livraison.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LivraisonResolver } from './livraison/livraison.resolver';
+import { UserResolver } from './user/user.resolver';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-
+import { UserComponent } from './user/user.component';
 
 export const appRoutes: Routes = [
   {
@@ -15,18 +16,30 @@ export const appRoutes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: 'livraison',
-    component: LivraisonComponent,
-    resolve: {
-      livraisons: LivraisonResolver
-    }
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent
+    component: HomeComponent,
+    children: [
+    {
+      path: 'livraison',
+      component: LivraisonComponent,
+      resolve: {
+        livraisons: LivraisonResolver
+      },
+      outlet: 'contentOutlet'
+    },
+    {
+      path: 'dashboard',
+      component: DashboardComponent,
+      outlet: 'ContentOutlet'
+    },
+    {
+      path: 'user',
+      component: UserComponent,
+      resolve: {
+        users: UserResolver
+      }
+        outlet: 'contentOutlet'
+    },
+    ]
   },
   {
     path: '',
@@ -43,7 +56,7 @@ export const appRoutes: Routes = [
     )
   ],
   exports: [RouterModule],
-  providers: [LivraisonResolver]
+  providers: [LivraisonResolver, UserResolver]
 })
 export class AppRoutingModule{
 

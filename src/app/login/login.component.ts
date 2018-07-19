@@ -13,15 +13,13 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  showHideSideBar : boolean = false;
-
   credentials = {
     username: '',
     password: ''
   };
 
-  constructor(private fb: FormBuilder
-              private appService: AppService
+  constructor(private fb: FormBuilder,
+              private appService: AppService,
               private router: Router) { }
 
   ngOnInit() {
@@ -33,10 +31,8 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.appService.authenticate(this.credentials, ()=>{
-      this.router.navigateByUrl('/home');
-    }){
-
-    }
+      this.router.navigateByUrl('/home/(contentOutlet:livraison)');
+    });
   }
 
 }

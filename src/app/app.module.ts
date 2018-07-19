@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
+import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { LivraisonComponent } from './livraison/livraison.component';
@@ -15,6 +17,10 @@ import { LivraisonService } from './livraison/livraison.service';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AppService } from './app.service';
+import { XhrInterceptor } from './xhr.interceptor';
+import { UserComponent } from './user/user.component';
+import { principalReducer } from './shared/principal.reducer';
+import { CrudComponent } from './shared/crud/crud.component';
 
 @NgModule({
   declarations: [
@@ -25,15 +31,24 @@ import { AppService } from './app.service';
     ContentComponent,
     DashboardComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    UserComponent,
+    CrudComponent
   ],
   imports: [
-    BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    StoreModule.forRoot({principal: principalReducer})
   ],
   providers: [
     LivraisonMockService,
     LivraisonService,
-    AppService
+    AppService,
+    { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true},
+    CookieService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

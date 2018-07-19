@@ -3,11 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { API_URLS } from '../config/api.url.config';
-import { Livraison } from '../shared/livraison';
+import { Livraison } from '../shared/livraison.model';
+import { CrudService } from '../shared/crud.service';
 
 
 @Injectable()
-export class LivraisonService {
+export class LivraisonService implements CrudService{
 
   constructor(private http: HttpClient){
 
@@ -25,7 +26,8 @@ export class LivraisonService {
     return this.http.put(API_URLS.LIVRAISONS_URL, livraison);
   }
 
-  deleteLivraison(idLivraison: number):Observable<any>{
+  deleteLivraison(idLivraison: number): Observable<any>{
     return this.http.delete(API_URLS.LIVRAISONS_URL + `/${idLivraison}`);
   }
+
 }
