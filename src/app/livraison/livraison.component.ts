@@ -43,7 +43,7 @@ export class LivraisonComponent implements OnInit{
   }
 
   loadLivraisons(){
-    this.livraisonService.getLivraisons().subscribe(
+    this.livraisonService.getAll().subscribe(
       data => { this.livraisons = data },
       error => { console.log('An error was occured.')},
       () => { console.log('loading livraisons was done.')}
@@ -52,7 +52,7 @@ export class LivraisonComponent implements OnInit{
 
   addLivraison(){
     const l = this.livraisonForm.value;
-    this.livraisonService.addLivraison(l).subscribe(
+    this.livraisonService.add(l).subscribe(
       res => {
         this.initLivraison();
         this.loadLivraisons();
@@ -61,7 +61,7 @@ export class LivraisonComponent implements OnInit{
   }
 
   updateLivraison(){
-    this.livraisonService.updateLivraison(this.selectedLivraison).subscribe(
+    this.livraisonService.update(this.selectedLivraison).subscribe(
       res => {
         this.initLivraison();
         this.loadLivraisons();
@@ -70,7 +70,7 @@ export class LivraisonComponent implements OnInit{
   }
 
   deleteLivraison(){
-    this.livraisonService.deleteLivraison(this.selectedLivraison.idLivraison).subscribe(
+    this.livraisonService.delete(this.selectedLivraison.idLivraison).subscribe(
       res => {
         this.selectedLivraison = new Livraison();
         this.loadLivraisons();

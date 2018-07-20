@@ -1,11 +1,11 @@
 import { Observable } from 'rxjs/Observable';
 
 export interface CrudService {
-  getLivraisons(): Observable<any>;
+  getAll(): Observable<any>;
 
-  addLivraison(produit): Observable<any>;
+  add(livraison): Observable<any>;
 
-  updateLivraison(produit): Observable<any>;
+  update(livraison): Observable<any>;
 
-  deleteLivraison(id): Observable<any>;
+  delete(id): Observable<any>;
 }

@@ -21,6 +21,7 @@ import { XhrInterceptor } from './xhr.interceptor';
 import { UserComponent } from './user/user.component';
 import { principalReducer } from './shared/principal.reducer';
 import { CrudComponent } from './shared/crud/crud.component';
+import { UserService } from './user/user.service';
 
 @NgModule({
   declarations: [

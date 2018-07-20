@@ -9,6 +9,6 @@ export class LivraisonResolver implements Resolve<any>{
 
   }
   resolve(){
-    return this.livraisonService.getLivraisons();
+    return this.livraisonService.getAll();
   }
 }

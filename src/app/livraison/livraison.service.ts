@@ -14,19 +14,19 @@ export class LivraisonService implements CrudService{
 
   }
 
-  getLivraisons(): Observable<any>{
+  getAll(): Observable<any>{
     return this.http.get(API_URLS.LIVRAISONS_URL);
   }
 
-  addLivraison(livraison : Livraison): Observable<any>{
+  add(livraison : Livraison): Observable<any>{
     return this.http.post(API_URLS.LIVRAISONS_URL, livraison);
   }
 
-  updateLivraison(livraison : Livraison): Observable<any>{
+  update(livraison : Livraison): Observable<any>{
     return this.http.put(API_URLS.LIVRAISONS_URL, livraison);
   }
 
-  deleteLivraison(idLivraison: number): Observable<any>{
+  delete(idLivraison: number): Observable<any>{
     return this.http.delete(API_URLS.LIVRAISONS_URL + `/${idLivraison}`);
   }
 

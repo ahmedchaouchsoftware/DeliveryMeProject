@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Livraison} from '../shared/livraison';
+import {Livraison} from '../shared/livraison.model';
 
 @Injectable()
 export class LivraisonMockService {
